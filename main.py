@@ -35,10 +35,16 @@ while True:
             if flag_start:
                     print(zip(dict_time[a],dict_number[a]))
                     minutes = sum([i*j for i,j in zip(dict_time[a],dict_number[a])])
+                    questions = sum(dict_number[a])
+                    times = sum(dict_time[a])
+                    
         if flag_start is True:
             os.system('clear')
             sys.stdout.write(f"The {a} interview is on!\n")
-            sys.stdout.write("\r{minutes} Minutes {seconds} Seconds".format(minutes=minutes, seconds=seconds))
+            # for t, n in zip(dict_time[a],dict_number[a]):
+            #     sys.stdout.write(f"Questions {a} left: {minutes//t + 1}\n")
+            # sys.stdout.write(f"Total questions left: {minutes//times + 1}\n")
+            sys.stdout.write(f"Total time left: {minutes} Minutes {seconds} Seconds\n")
             # sys.stdout.flush()
             time.sleep(1)
             seconds -= 1
