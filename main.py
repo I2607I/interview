@@ -1,4 +1,5 @@
 import webbrowser
+import subprocess
 from pynput.keyboard import Key, Controller
 import time
 import sys
@@ -77,9 +78,14 @@ while True:
                 print(problem)
                 time.sleep(1)
                 seconds -= 1
+                if all_minutes == 0 and seconds == 0:
+                    flag_start = False
+                    break
                 if seconds <= 0:
                     all_minutes -= 1
                     seconds = 60
+        print("Time left!")
+        subprocess.run(["gedit", "main.py"])
             
     except KeyboardInterrupt as e:
         break
