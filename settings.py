@@ -1,6 +1,6 @@
 # settings algo
 algo_number = 2
-algo_time = 15
+algo_time = 1
 # settings tech
 tech_number = 10
 tech_time = 1
