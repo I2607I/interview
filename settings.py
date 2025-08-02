@@ -2,7 +2,7 @@
 algo_number = 2
 algo_time = 1
 # settings tech
-tech_number = 10
+tech_number = 2
 tech_time = 1
 # settings interview
 interview_algo_number = 2

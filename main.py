@@ -6,8 +6,10 @@ import sys
 import os
 import random
 import os, random
-
 import settings as sts
+
+# вынести эту хардкодность в переменные
+# добавить стандарт для файла настроек
 
 dict_time = {'tech': [sts.tech_time, 0], 'algo': [0, sts.algo_time], 'interview': [sts.interview_tech_time, sts.interview_algo_time]}
 dict_number = {'tech': [sts.tech_number, 0], 'algo': [0, sts.algo_number], 'interview': [sts.interview_tech_number, sts.interview_algo_number]}
@@ -20,15 +22,23 @@ def find_problem(type_interview):
     count_problems = dict_number[type_interview][1]
     questions = []
     problems = []
+    # print('count_problems', count_problems)
     files_list = random.sample(os.listdir("algo_problems"), k=count_problems)
+    print(files_list)
     for filename in files_list:
         filename = "algo_problems/" + filename
         with open(filename) as file:
             problem = file.read()
             problems.append(problem)
+    files_list = random.sample(os.listdir("tech_problems"), k=count_questions)
+    for filename in files_list:
+        filename = "tech_problems/" + filename
+        with open(filename) as file:
+            problem = file.read()
+            problems.append(problem)
     return problems
 
-print(find_problem("algo"))
+print(find_problem("tech"))
 time_start = time.time()
 seconds = 60
 minutes = 0
@@ -50,23 +60,27 @@ while True:
                 # webbrowser.open("input.py")
                 flag_start = True
             elif a == 'exit':
-                break
+                breaks
             if flag_start:
-                    print(zip(dict_time[a],dict_number[a]))
-                    minutes = [i*j for i,j in zip(dict_time[a],dict_number[a])]
-                    all_minutes = sum(minutes)
-                    questions = sum(dict_number[a])
-                    times = sum(dict_time[a])
-                    all_minutes -= 1
-                    problems = find_problem(a)
+                print(zip(dict_time[a],dict_number[a]))
+                minutes = [i*j for i,j in zip(dict_time[a],dict_number[a])]
+                all_minutes = sum(minutes)
+                questions = sum(dict_number[a])
+                times = sum(dict_time[a])
+                all_minutes -= 1
+                problems = find_problem(a)
         while True:
             if flag_start is True:
                 os.system('clear')
                 sys.stdout.write(f"The {a} interview is on!\n")
                 for i, (t, n) in enumerate(zip(dict_time[a],dict_number[a])):
+                    print(1)
                     if t != 0:
                         if i == 0:
+                            n = int((all_minutes+1)/t)
                             sys.stdout.write(f"Questions tech left: {int((all_minutes+1-minutes[1])/t)}\n")
+                            print(problems)
+                            problem = problems[n-1]
                         else:
                             n = int((all_minutes+1)/t)
                             sys.stdout.write(f"Questions algo left: {n}\n")
